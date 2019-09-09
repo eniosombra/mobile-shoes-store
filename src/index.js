@@ -1,12 +1,20 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Provider} from 'react-redux';
+import './config/ReactotronConfig';
+import {StatusBar, Text, View} from 'react-native';
+import store from './store';
 
-const App = () => {
+import Routes from './routes';
+import NavigationService from './services/navigation';
+
+export default function App() {
   return (
-    <View>
-      <Text>Mobile Shoes Store</Text>
-    </View>
-  );
-};
+    <Provider store={store}>
+      <StatusBar barStyle="light-content" />
 
-export default App;
+      <Routes
+        ref={navigatorRef => NavigationService.setNavigator(navigatorRef)}
+      />
+    </Provider>
+  );
+}
